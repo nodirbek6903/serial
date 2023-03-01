@@ -15,6 +15,10 @@ const car = {
 // console.log(objtoJson);
 // console.log(jsontoObj);
 
+// git add .
+// git commit -m "jsonlash"
+// git push origin main
+
 const clone = JSON.parse(JSON.stringify(car));
 
 clone.extra.ballon = 10;
