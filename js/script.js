@@ -103,6 +103,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
   //Modal
 
+  const modalTrigger = document.querySelectorAll("[data-modal"),
+    modal = document.querySelector(".modal");
+
   function closeModal() {
     modal.classList.add("hide");
     modal.classList.remove("show");
@@ -115,17 +118,15 @@ window.addEventListener("DOMContentLoaded", () => {
     clearInterval(modalTimerId);
   }
 
-  const modalTrigger = document.querySelectorAll("[data-modal"),
-    modal = document.querySelector(".modal"),
-    modalCloseBtn = document.querySelector("[data-close]");
+  // modalCloseBtn = document.querySelector("[data-close]");
 
   modalTrigger.forEach((item) => {
     item.addEventListener("click", openModal);
   });
 
-  modalCloseBtn.addEventListener("click", closeModal);
+  // modalCloseBtn.addEventListener("click", closeModal);
   modal.addEventListener("click", (e) => {
-    if (e.target === modal) {
+    if (e.target == modal || e.target.getAttribute("data-close") == "") {
       closeModal();
     }
   });
@@ -218,20 +219,21 @@ window.addEventListener("DOMContentLoaded", () => {
 
   // Form
   const forms = document.querySelectorAll("form");
-
   forms.forEach((form) => {
     postData(form);
   });
+  console.log(forms);
 
   const msg = {
-    loading: "Loading",
-    success: "Thanks, for submitting our form",
+    loading: "Loading...",
+    success: "Thank's for submitting our form",
     failure: "Something went wrong",
   };
 
   function postData(form) {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
+
       const statusMessage = document.createElement("div");
       statusMessage.textContent = msg.loading;
       form.append(statusMessage);
@@ -239,28 +241,16 @@ window.addEventListener("DOMContentLoaded", () => {
       const request = new XMLHttpRequest();
       request.open("POST", "server.php");
 
-      request.setRequestHeader("Content-Type", "application/json");
-
-      const obj = {};
+      // request.setRequestHeader("Content-Type", "multipart/form-data");
 
       const formData = new FormData(form);
 
-      formData.forEach((val, key) => {
-        obj[key] = val;
-      });
-      const json = JSON.stringify(obj);
-
-      request.send(json);
-
       request.send(formData);
+
       request.addEventListener("load", () => {
         if (request.status === 200) {
           console.log(request.response);
           statusMessage.textContent = msg.success;
-          form.reset();
-          setTimeout(() => {
-            statusMessage.remove();
-          }, 2000);
         } else {
           statusMessage.textContent = msg.failure;
         }
