@@ -222,7 +222,7 @@ window.addEventListener("DOMContentLoaded", () => {
   forms.forEach((form) => {
     postData(form);
   });
-  console.log(forms);
+  // console.log(forms);
 
   const msg = {
     loading: "Loading...",
@@ -241,11 +241,18 @@ window.addEventListener("DOMContentLoaded", () => {
       const request = new XMLHttpRequest();
       request.open("POST", "server.php");
 
-      // request.setRequestHeader("Content-Type", "multipart/form-data");
+      request.setRequestHeader("Content-Type", "application/json");
 
+      const obj = {};
       const formData = new FormData(form);
 
-      request.send(formData);
+      formData.forEach((val, key) => {
+        obj[key] = val;
+      });
+
+      const json = JSON.stringify(obj);
+      // console.log(json);
+      request.send(json);
 
       request.addEventListener("load", () => {
         if (request.status === 200) {
@@ -260,5 +267,11 @@ window.addEventListener("DOMContentLoaded", () => {
         }
       });
     });
+  }
+
+  function showThanksModal() {
+    const prevModalDialog = document.querySelector(".modal__dialog");
+
+    prevModalDialog.classList.add("hide");
   }
 });
