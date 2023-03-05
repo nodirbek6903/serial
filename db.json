@@ -1,0 +1,37 @@
+{
+  "menu": [
+    {
+      "img": "img/tabs/1.jpg",
+      "altimg": "usual",
+      "title": "Plan Usual”",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque aliquid molestiae, sit eveniet, tempora ipsum quaerat recusandae sapiente doloremque corporis dolores quas consectetur ut labore distinctio libero reiciendis harum sequi?",
+      "price": 10
+    },
+    {
+      "img": "img/tabs/2.jpg",
+      "altimg": "plan",
+      "title": "Plan “Premium”",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque aliquid molestiae, sit eveniet, tempora ipsum quaerat recusandae sapiente doloremque corporis dolores quas consectetur ut labore distinctio libero reiciendis harum sequi?",
+      "price": 15
+    },
+    {
+      "img": "img/tabs/3.jpg",
+      "altimg": "vip",
+      "title": "Plan VIP”",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque aliquid molestiae, sit eveniet, tempora ipsum quaerat recusandae sapiente doloremque corporis dolores quas consectetur ut labore distinctio libero reiciendis harum sequi?",
+      "price": 20
+    }
+  ],
+  "request": [
+    {
+      "name": "Nodirjon",
+      "phone": "+9994324324",
+      "id": 1
+    },
+    {
+      "name": "Nodirjon",
+      "phone": "+9994324324",
+      "id": 2
+    }
+  ]
+}

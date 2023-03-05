@@ -251,7 +251,7 @@ window.addEventListener("DOMContentLoaded", () => {
         obj[key] = val;
       });
 
-      fetch("server.php", {
+      fetch("http://localhost:3000/request", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -304,14 +304,18 @@ window.addEventListener("DOMContentLoaded", () => {
       <div class="modal__title">${message}</div>
     </div>
     `;
+
+    document.querySelector(".modal").append(thanksModal);
+
+    setTimeout(() => {
+      thanksModal.remove();
+      prevModalDialog.classList.add("show");
+      prevModalDialog.classList.remove("hide");
+      closeModal();
+    }, 4000);
   }
 
-  document.querySelector(".modal").append(thanksModal);
-
-  setTimeout(() => {
-    thanksModal.remove();
-    prevModalDialog.classList.add("show");
-    prevModalDialog.classList.remove("hide");
-    closeModal();
-  }, 4000);
+  // fetch(" http://localhost:3000/menu")
+  //   .then((data) => data.json())
+  //   .then((res) => console.log(res));
 });
