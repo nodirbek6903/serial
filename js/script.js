@@ -220,7 +220,7 @@ window.addEventListener("DOMContentLoaded", () => {
   // Form
   const forms = document.querySelectorAll("form");
   forms.forEach((form) => {
-    postData(form);
+    bindpostData(form);
   });
   // console.log(forms);
 
@@ -229,8 +229,18 @@ window.addEventListener("DOMContentLoaded", () => {
     success: "Thank's for submitting our form",
     failure: "Something went wrong",
   };
+  async function postData(url, data) {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: data,
+    });
+    return await res.json();
+  }
 
-  function postData(form) {
+  function bindpostData(form) {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
 
@@ -245,20 +255,9 @@ window.addEventListener("DOMContentLoaded", () => {
       form.insertAdjacentElement("afterend", statusMessage);
       const formData = new FormData(form);
 
-      const obj = {};
+      const json = JSON.stringify(Object.fromEntries(formData.entries()));
 
-      formData.forEach((val, key) => {
-        obj[key] = val;
-      });
-
-      fetch("http://localhost:3000/request", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(obj),
-      })
-        .then((data) => data.text())
+      postData("http://localhost:3000/request", json)
         .then((data) => {
           console.log(data);
           showThanksModal(msg.success);
